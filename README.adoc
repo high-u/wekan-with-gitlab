@@ -1,0 +1,11 @@
+= wekan with gitlab
+
+== Usage
+
+[source,shell]
+----
+git clone https://github.com/high-u/wekan-with-gitlab.git
+cd wekan-with-gitlab
+sudo docker-compose up -d
+----
+
