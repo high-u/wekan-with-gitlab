@@ -146,7 +146,7 @@ services:
       # For example, if you want to have wekan on port 3001,
       # use 3001:8080 . Do not add any extra address etc here, that way it does not work.
       # remove port mapping if you use nginx reverse proxy, port 8080 is already exposed to wekan-tier network
-      - 80:8080
+      - 8080:8080
     environment:
       - MONGO_URL=mongodb://wekandb:27017/wekan
       #---------------------------------------------------------------
@@ -161,7 +161,7 @@ services:
       #  - http://example.com
       #  - http://boards.example.com
       #  - http://192.168.1.100    <=== using at local LAN
-      - ROOT_URL=http://localhost  #   <=== using only at same laptop/desktop where Wekan is installed
+      - ROOT_URL=http://localhost:8080  #   <=== using only at same laptop/desktop where Wekan is installed
       #---------------------------------------------------------------
       # ==== EMAIL SETTINGS ====
       # Email settings are required in both MAIL_URL and Admin Panel,
@@ -170,8 +170,8 @@ services:
       # NOTE: Special characters need to be url-encoded in MAIL_URL.
       #       You can encode those characters for example at: https://www.urlencoder.org
       #- MAIL_URL=smtp://user:pass@mailserver.example.com:25/
-      - MAIL_URL=smtp://<mail_url>:25/?ignoreTLS=true&tls={rejectUnauthorized:false}
-      - MAIL_FROM=Wekan Notifications <noreply.wekan@mydomain.com>
+      #- MAIL_URL=smtp://<mail_url>:25/?ignoreTLS=true&tls={rejectUnauthorized:false}
+      #- MAIL_FROM=Wekan Notifications <noreply.wekan@mydomain.com>
       #---------------------------------------------------------------
       # ==== OPTIONAL: MONGO OPLOG SETTINGS =====
       # https://github.com/wekan/wekan-mongodb/issues/2#issuecomment-378343587
@@ -312,34 +312,34 @@ services:
       # https://github.com/wekan/wekan/issues/1874
       # https://github.com/wekan/wekan/wiki/OAuth2
       # Enable the OAuth2 connection
-      #- OAUTH2_ENABLED=true
+      - OAUTH2_ENABLED=true
       # OAuth2 docs: https://github.com/wekan/wekan/wiki/OAuth2
       # OAuth2 login style: popup or redirect.
       #- OAUTH2_LOGIN_STYLE=redirect
       # OAuth2 Client ID.
-      #- OAUTH2_CLIENT_ID=abcde12345
+      - OAUTH2_CLIENT_ID={GitLab Application ID}
       # OAuth2 Secret.
-      #- OAUTH2_SECRET=54321abcde
+      - OAUTH2_SECRET={GitLab Secret}
       # OAuth2 Server URL.
-      #- OAUTH2_SERVER_URL=https://chat.example.com
+      - OAUTH2_SERVER_URL=https://gitlab.example.com
       # OAuth2 Authorization Endpoint.
-      #- OAUTH2_AUTH_ENDPOINT=/oauth/authorize
+      - OAUTH2_AUTH_ENDPOINT=/oauth/authorize
       # OAuth2 Userinfo Endpoint.
-      #- OAUTH2_USERINFO_ENDPOINT=/oauth/userinfo
+      - OAUTH2_USERINFO_ENDPOINT=/api/v4/user
       # OAuth2 Token Endpoint.
-      #- OAUTH2_TOKEN_ENDPOINT=/oauth/token
+      - OAUTH2_TOKEN_ENDPOINT=/oauth/token
       # OAUTH2 ID Token Whitelist Fields.
       #- OAUTH2_ID_TOKEN_WHITELIST_FIELDS=""
       # OAUTH2 Request Permissions.
-      #- OAUTH2_REQUEST_PERMISSIONS=openid profile email
+      - OAUTH2_REQUEST_PERMISSIONS=read_user
       # OAuth2 ID Mapping
-      #- OAUTH2_ID_MAP=
+      - OAUTH2_ID_MAP=email
       # OAuth2 Username Mapping
-      #- OAUTH2_USERNAME_MAP=
+      - OAUTH2_USERNAME_MAP=name
       # OAuth2 Fullname Mapping
-      #- OAUTH2_FULLNAME_MAP=
+      - OAUTH2_FULLNAME_MAP=name
       # OAuth2 Email Mapping
-      #- OAUTH2_EMAIL_MAP=
+      - OAUTH2_EMAIL_MAP=email
       #-----------------------------------------------------------------
       # ==== LDAP: UNCOMMENT ALL TO ENABLE LDAP ====
       # https://github.com/wekan/wekan/wiki/LDAP

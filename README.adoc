@@ -2,10 +2,37 @@
 
 == Usage
 
+=== Setup GitLab
+
+* Open "`User Settings`" .
+* Open "`Applications`" .
+** Input Name.
+*** e.g. `wekan`
+** Input "`Redirect URI`" .
+*** e.g. `https://localhost:8080/_oauth/oidc`
+** Check "`read_user`" .
+
+=== docker-compose up
+
 [source,shell]
 ----
 git clone https://github.com/high-u/wekan-with-gitlab.git
 cd wekan-with-gitlab
+----
+
+[source,shell]
+----
+vim docker-compose.yml
+----
+
+* Edit the following
+** ROOT_URL
+** OAUTH2_CLIENT_ID
+** OAUTH2_SECRET
+** OAUTH2_SERVER_UR
+
+[source,shell]
+----
 sudo docker-compose up -d
 ----
 
