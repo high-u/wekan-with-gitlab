@@ -18,6 +18,10 @@
 ----
 git clone https://github.com/high-u/wekan-with-gitlab.git
 cd wekan-with-gitlab
+----
+
+[source,shell]
+----
 vim docker-compose.yml
 ----
 
